@@ -48,14 +48,15 @@ public class AuthController {
 
     @ApiOperation(value = "注册/登陆")
     @RequestMapping(value = "/user",method = RequestMethod.POST)
-    public BaseResultDto signin(HttpServletRequest request, @Valid @RequestBody SysUserReqVo vo) throws GeniusException {
+    public EntityDto<AuthUserInfoDto> signin(HttpServletRequest request, @Valid @RequestBody SysUserReqVo vo) throws GeniusException {
         HttpSession session = request.getSession();
         authApplication.registOrLogin(vo,session);
         // 校验通过后删除验证码之前的session和Cookie
         if (session != null) {
             session.invalidate();
         }
-        return new BaseResultDto(CodeEnum.Success.getCode(),"登陆成功");
+        AuthUserInfoDto infoDto = authUserQuery.queryForUser(vo.getPhone());
+        return new EntityDto<>(infoDto,CodeEnum.Success.getCode(),"成功");
     }
 
     @ApiOperation(value = "获取用户基本信息")
