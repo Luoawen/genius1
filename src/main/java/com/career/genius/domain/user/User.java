@@ -32,15 +32,19 @@ public class User extends BaseEntity {
     @Column(name = "open_id",columnDefinition = "varchar(50) comment'openId'")
     private String openId;
 
+    @Column(name = "trade",columnDefinition = "varchar(50) comment'所属行业'")
+    private String trade;
+
     /**
      * @Author Marker
      * @Date  添加用户
      * @Discription
      **/
-    public void addUser(String userName,String phone,String headImage,String openId) {
+    public void addUser(String userName,String phone,String headImage,String openId,String trade) {
         this.userName = userName;
         this.phone = phone;
         this.headImage = headImage;
+        this.trade = trade;
         this.openId = openId;
         super.setCreateTime(new Date());
         super.setUpdateTime(new Date());

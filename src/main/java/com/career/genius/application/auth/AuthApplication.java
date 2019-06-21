@@ -3,7 +3,7 @@ package com.career.genius.application.auth;
 import com.career.genius.application.auth.vo.SysUserReqVo;
 import com.career.genius.config.Exception.GeniusException;
 import com.career.genius.domain.user.User;
-import com.career.genius.port.dao.UserDao;
+import com.career.genius.port.dao.user.UserDao;
 import com.career.genius.utils.Constants;
 import com.career.genius.utils.SendSms;
 import com.usm.utils.ObjectHelper;
@@ -55,7 +55,7 @@ public class AuthApplication {
         User user = userDao.findUserByPhone(vo.getPhone());
         if (ObjectHelper.isEmpty(user)) {
             user = new User();
-            user.addUser(vo.getPhone(),vo.getPhone(),"","");
+            user.addUser(vo.getPhone(),vo.getPhone(),"","","");
             userDao.save(user);
         }
     }

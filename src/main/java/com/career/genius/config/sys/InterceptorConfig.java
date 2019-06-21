@@ -5,6 +5,8 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.util.UUID;
+
 /**
  * 请描述该类
  *
@@ -48,4 +50,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
 //        factory.setMaxRequestSize(DataSize.ofMegabytes(40));
 //        return factory.createMultipartConfig();
 //    }
+
+    public static void main(String[] args) {
+        System.out.println(UUID.randomUUID().toString());
+    }
 }

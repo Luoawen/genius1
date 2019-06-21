@@ -1,4 +1,4 @@
-package com.career.genius.config.auth.vo;
+package com.career.genius.application.auth.vo;
 
 import com.career.genius.utils.MsgCodeUtil;
 import io.swagger.annotations.ApiModel;

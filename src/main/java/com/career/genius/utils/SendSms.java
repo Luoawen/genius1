@@ -10,8 +10,11 @@ import com.aliyuncs.exceptions.ServerException;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import com.career.genius.config.Exception.GeniusException;
+import com.career.genius.config.properties.BaseConfigProperties;
 import com.google.gson.JsonObject;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -25,27 +28,14 @@ import java.util.Random;
  * @discription
  **/
 @Slf4j
+@Service
 public class SendSms {
 
-    // 产品名称:云通信短信API产品,开发者无需替换
-    static final String product = "Dysmsapi";
     // 产品域名,开发者无需替换
     static final String domain = "dysmsapi.aliyuncs.com";
 
-    private static final String signName = "云买电子";
-
-    private static final String templateCode = "SMS_166376555";
-
-    private static final String accessKeyId = "LTAIMixLEiPaOAkw";
-
-    private static final String accessSecret = "8IpkGrp9vNSUKlHIbFKtdO6KJHD2Cl";
-
-    public static void main(String[] args) {
-
-    }
-
     public static void sendSms(String phone, HttpServletRequest servletRequest) throws GeniusException {
-        DefaultProfile profile = DefaultProfile.getProfile("default", accessKeyId, accessSecret);
+        DefaultProfile profile = DefaultProfile.getProfile("default", BaseConfigProperties.aliyunAccessKey, BaseConfigProperties.aliyunAccessSecret);
         IAcsClient client = new DefaultAcsClient(profile);
 
         CommonRequest request = new CommonRequest();
@@ -55,8 +45,8 @@ public class SendSms {
         request.setVersion("2017-05-25");
         request.setAction("SendSms");
         request.putQueryParameter("PhoneNumbers", phone);
-        request.putQueryParameter("SignName", signName);
-        request.putQueryParameter("TemplateCode", templateCode);
+        request.putQueryParameter("SignName", BaseConfigProperties.aliyunSignName);
+        request.putQueryParameter("TemplateCode", BaseConfigProperties.aliyunTemplateCode);
         String randomValue = getRandomValue();
         request.putQueryParameter("TemplateParam", "{\"code\":\""+ randomValue + "\"}");
         HttpSession session = servletRequest.getSession();
@@ -76,6 +66,10 @@ public class SendSms {
         }
     }
 
+    /**
+     * 获取4位随机数
+     * @return
+     */
     private static String getRandomValue() {
         String str="0123456789";
         StringBuilder sb=new StringBuilder(4);

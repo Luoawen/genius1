@@ -1,22 +1,21 @@
 package com.career.genius.controller.auth;
 
 import com.career.genius.application.auth.AuthApplication;
+import com.career.genius.application.auth.dao.AuthUserInfoDto;
+import com.career.genius.application.auth.query.AuthUserQuery;
 import com.career.genius.application.auth.vo.SysUserReqVo;
 import com.career.genius.config.Exception.GeniusException;
-import com.career.genius.config.auth.vo.UserReqVo;
+import com.career.genius.application.auth.vo.UserReqVo;
 import com.usm.enums.CodeEnum;
 import com.usm.vo.BaseResultDto;
+import com.usm.vo.EntityDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -36,6 +35,9 @@ public class AuthController {
     @Autowired
     AuthApplication authApplication;
 
+    @Autowired
+    AuthUserQuery authUserQuery;
+
     @ApiOperation(value = "发送短信验证码")
     @RequestMapping(value = "/message",method = RequestMethod.POST)
     public BaseResultDto sendMsgCode(HttpServletRequest request, @RequestBody UserReqVo vo) throws Exception{
@@ -53,6 +55,13 @@ public class AuthController {
             session.invalidate();
         }
         return new BaseResultDto(CodeEnum.Success.getCode(),"登陆成功");
+    }
+
+    @ApiOperation(value = "获取用户基本信息")
+    @RequestMapping(value = "/user/{phone}",method = RequestMethod.GET)
+    public EntityDto<AuthUserInfoDto> getUserInfo(@PathVariable("phone") String phone) throws GeniusException {
+        AuthUserInfoDto infoDto = authUserQuery.queryForUser(phone);
+        return new EntityDto<>(infoDto,CodeEnum.Success.getCode(),"成功");
     }
 
 

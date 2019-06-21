@@ -1,4 +1,4 @@
-package com.career.genius.port.dao;
+package com.career.genius.port.dao.user;
 
 import com.career.genius.domain.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
