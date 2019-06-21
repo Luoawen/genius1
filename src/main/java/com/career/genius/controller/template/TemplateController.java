@@ -8,6 +8,7 @@ import com.career.genius.config.Exception.GeniusException;
 import com.usm.enums.CodeEnum;
 import com.usm.vo.BaseResultDto;
 import com.usm.vo.ListDto;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ import java.util.List;
 @RestController
 @Data
 @RequestMapping(value = "")
+@Api(tags = "模板接口")
 public class TemplateController {
 
     @Autowired

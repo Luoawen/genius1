@@ -9,6 +9,7 @@ import com.career.genius.application.auth.vo.UserReqVo;
 import com.usm.enums.CodeEnum;
 import com.usm.vo.BaseResultDto;
 import com.usm.vo.EntityDto;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +30,7 @@ import javax.validation.Valid;
 @RestController
 @Slf4j
 @RequestMapping(value = "/users")
-@ApiModel(value = "用户接口")
+@Api(tags = "登陆/注册接口")
 public class AuthController {
 
     @Autowired

@@ -30,7 +30,7 @@ public class SwaggerConfig {
 //    }
 
     @Bean
-    public Docket crmWebApi() {
+    public Docket geniusApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("API")
                 .genericModelSubstitutes(DeferredResult.class)
