@@ -44,8 +44,6 @@ public class AuthApplication {
      * @Discription
      **/
     public void registOrLogin(SysUserReqVo vo, HttpSession session) throws GeniusException {
-        log.error("phone--------->{}",vo.getPhone());
-        log.error("code--------->{}",vo.getAuthCode());
         String sessionAuthCode = session.getAttribute(Constants.MOBILE_MSG_CODE) + "";
         // 删除session中的验证码
         session.removeAttribute(Constants.MOBILE_MSG_CODE);

@@ -1,5 +1,6 @@
 package com.career.genius.domain.user;
 
+import com.career.genius.application.user.dto.WechatUserInfoDto;
 import com.career.genius.domain.common.BaseEntity;
 import lombok.Data;
 
@@ -15,8 +16,8 @@ import java.util.Date;
  * @time 2019-05-21 22:22
  * @discription
  **/
-@Entity
 @Data
+@Entity
 @Table(name = "app_user")
 public class User extends BaseEntity {
 
@@ -47,6 +48,18 @@ public class User extends BaseEntity {
         this.trade = trade;
         this.openId = openId;
         super.setCreateTime(new Date());
+        super.setUpdateTime(new Date());
+    }
+
+    /**
+     * @Author Marker
+     * @Date  绑定微信用户信息
+     * @Discription
+     **/
+    public void bindWechatUser(WechatUserInfoDto dto) {
+        this.userName = dto.getUserName();
+        this.headImage = dto.getHeadImage();
+        this.openId = dto.getOpenId();
         super.setUpdateTime(new Date());
     }
 
