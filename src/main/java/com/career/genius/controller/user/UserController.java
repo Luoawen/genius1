@@ -46,6 +46,7 @@ public class UserController {
      * @Date  绑定微信用户信息
      * @Discription
      **/
+    @ApiOperation(("绑定微信用户信息"))
     @RequestMapping(value = "/user/wechat/info")
     public BaseResultDto bindWeChatUser(@RequestBody WechatUserInfoDto dto) {
         userApplication.bindWeChatUser(dto);
