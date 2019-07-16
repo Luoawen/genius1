@@ -5,6 +5,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
+
 
 /**
  * 请描述该类
@@ -15,7 +17,7 @@ import lombok.Data;
  **/
 @ApiModel(value = "用户信息DTO")
 @Data
-public class AuthUserInfoDto {
+public class AuthUserInfoDto implements Serializable {
 
     @ApiModelProperty(value = "用户ID")
     @ColumnAlias(value = "id")

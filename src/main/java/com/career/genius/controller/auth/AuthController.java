@@ -52,10 +52,11 @@ public class AuthController {
         HttpSession session = request.getSession();
         authApplication.registOrLogin(vo,session);
         // 校验通过后删除验证码之前的session和Cookie
-        if (session != null) {
+       /* if (session != null) {
             session.invalidate();
-        }
+        }*/
         AuthUserInfoDto infoDto = authUserQuery.queryForUser(vo.getPhone());
+        session.setAttribute("userInfo",infoDto);
         return new EntityDto<>(infoDto,CodeEnum.Success.getCode(),"成功");
     }
 
