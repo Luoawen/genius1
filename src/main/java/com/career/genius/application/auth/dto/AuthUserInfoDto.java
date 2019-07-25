@@ -1,4 +1,4 @@
-package com.career.genius.application.auth.dao;
+package com.career.genius.application.auth.dto;
 
 import com.career.genius.utils.jdbcframework.ColumnAlias;
 import io.swagger.annotations.ApiModel;

@@ -1,6 +1,6 @@
 package com.career.genius.utils.session;
 
-import com.career.genius.application.auth.dao.AuthUserInfoDto;
+import com.career.genius.application.auth.dto.AuthUserInfoDto;
 import com.career.genius.config.Exception.GeniusException;
 import com.usm.utils.ObjectHelper;
 

@@ -1,6 +1,6 @@
 package com.career.genius.application.wechat.vo;
 
-import com.career.genius.application.auth.dao.AuthUserInfoDto;
+import com.career.genius.application.auth.dto.AuthUserInfoDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

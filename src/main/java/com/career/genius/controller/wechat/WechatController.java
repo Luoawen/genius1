@@ -1,10 +1,8 @@
 package com.career.genius.controller.wechat;
 
-import java.util.HashMap;
-import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
-import com.career.genius.application.auth.dao.AuthUserInfoDto;
+import com.career.genius.application.auth.dto.AuthUserInfoDto;
 import com.career.genius.application.wechat.dto.WechatDto;
 import com.career.genius.application.wechat.vo.WechatAuthVO;
 import com.career.genius.application.wechat.vo.WechatShareVO;

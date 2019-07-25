@@ -15,21 +15,21 @@ import lombok.Data;
 @Data
 public class WechatUserInfoDto {
 
-    @ApiModelProperty(name = "用户ID")
+    @ApiModelProperty(value = "用户ID")
     private String userId;
 
-    @ApiModelProperty(name = "微信用户名")
+    @ApiModelProperty(value = "微信用户名")
     private String userName;
 
-    @ApiModelProperty(name = "微信头像")
+    @ApiModelProperty(value = "微信头像")
     private String headImage;
 
-    @ApiModelProperty(name = "openId")
+    @ApiModelProperty(value = "openId")
     private String openId;
 
-    @ApiModelProperty(name = "手机号")
+    @ApiModelProperty(value = "手机号")
     private String phone;
 
-    @ApiModelProperty(name = "微信uniqueId")
+    @ApiModelProperty(value = "微信uniqueId")
     private String uniqueId;
 }

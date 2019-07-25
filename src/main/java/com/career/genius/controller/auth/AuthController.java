@@ -1,7 +1,7 @@
 package com.career.genius.controller.auth;
 
 import com.career.genius.application.auth.AuthApplication;
-import com.career.genius.application.auth.dao.AuthUserInfoDto;
+import com.career.genius.application.auth.dto.AuthUserInfoDto;
 import com.career.genius.application.auth.query.AuthUserQuery;
 import com.career.genius.application.auth.vo.SysUserReqVo;
 import com.career.genius.config.Exception.GeniusException;
@@ -10,7 +10,6 @@ import com.usm.enums.CodeEnum;
 import com.usm.vo.BaseResultDto;
 import com.usm.vo.EntityDto;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
