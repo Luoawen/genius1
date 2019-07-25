@@ -36,6 +36,9 @@ public class User extends BaseEntity {
     @Column(name = "trade",columnDefinition = "varchar(50) comment'所属行业'")
     private String trade;
 
+    @Column(name = "unique_id",columnDefinition = "varchar(50) comment'微信uniqueId'")
+    private String wechatUniqueId;
+
     /**
      * @Author Marker
      * @Date  添加用户
@@ -57,6 +60,7 @@ public class User extends BaseEntity {
      * @Discription
      **/
     public void bindWechatUser(WechatUserInfoDto dto) {
+        this.wechatUniqueId = dto.getUniqueId();
         this.userName = dto.getUserName();
         this.headImage = dto.getHeadImage();
         this.openId = dto.getOpenId();

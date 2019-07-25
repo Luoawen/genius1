@@ -29,4 +29,7 @@ public class WechatUserInfoDto {
 
     @ApiModelProperty(name = "手机号")
     private String phone;
+
+    @ApiModelProperty(name = "微信uniqueId")
+    private String uniqueId;
 }
