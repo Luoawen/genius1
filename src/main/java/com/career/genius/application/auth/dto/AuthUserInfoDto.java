@@ -40,6 +40,6 @@ public class AuthUserInfoDto implements Serializable {
     private String openId;
 
     @ApiModelProperty(value = "所属行业")
-    @ColumnAlias(value = "open_id")
+    @ColumnAlias(value = "trade")
     private String trade;
 }
