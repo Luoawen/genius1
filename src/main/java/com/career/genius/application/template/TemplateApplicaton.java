@@ -4,6 +4,7 @@ import com.career.genius.application.template.dto.TemplateDto;
 import com.career.genius.config.Exception.GeniusException;
 import com.career.genius.domain.template.Template;
 import com.career.genius.port.dao.template.TemplateDao;
+import com.career.genius.port.dao.user.UserDao;
 import com.usm.utils.ObjectHelper;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,18 +22,26 @@ import org.springframework.transaction.annotation.Transactional;
 @Data
 public class TemplateApplicaton {
 
+    public static final String URI = "http://m.yunmaidianzi.com/wechat/share";
+
     @Autowired
     TemplateDao templateDao;
+
+    @Autowired
+    UserDao userDao;
+
+
 
     /**
      * 添加模板
      * @param dto
      */
     @Transactional
-    public void addTemplate(TemplateDto dto) {
+    public String addTemplate(TemplateDto dto) {
         Template template = new Template();
         template.addTemplate(dto.getTitle(),dto.getContent(),dto.getUserId());
         templateDao.save(template);
+        return URI + "?" + dto.getUserId();
     }
 
     @Transactional

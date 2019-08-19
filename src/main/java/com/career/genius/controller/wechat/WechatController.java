@@ -8,6 +8,7 @@ import com.career.genius.application.wechat.vo.WechatAuthVO;
 import com.career.genius.application.wechat.vo.WechatShareVO;
 import com.career.genius.config.Exception.GeniusException;
 import com.career.genius.config.config.Config;
+import com.career.genius.port.setvice.WxService;
 import com.career.genius.utils.session.SessionUtil;
 import com.career.genius.utils.wechat.WXUtil;
 import com.career.genius.utils.wechat.WechatUtil;
@@ -42,6 +43,14 @@ public class WechatController {
         WechatShareVO vo = new WechatShareVO(Config.WX_SHARE_URL, userInfo);
         return new EntityDto<>(vo, CodeEnum.Success.getCode(),"成功");
     }
+
+    /*@GetMapping(value = "/share")
+    public EntityDto<String> wechatOpen(String userId,HttpServletRequest request) {
+        WxService.authorize()
+        return new EntityDto<>("", CodeEnum.Success.getCode(),"成功");
+    }*/
+
+
 
 
 

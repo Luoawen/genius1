@@ -7,6 +7,7 @@ import com.career.genius.application.template.vo.TemplateVO;
 import com.career.genius.config.Exception.GeniusException;
 import com.usm.enums.CodeEnum;
 import com.usm.vo.BaseResultDto;
+import com.usm.vo.EntityDto;
 import com.usm.vo.ListDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -42,9 +43,9 @@ public class TemplateController {
      */
     @ApiOperation(value = "新增模板")
     @PostMapping(value = "/template")
-    public BaseResultDto addTemplate(@RequestBody TemplateDto dto) {
-        templateApplicaton.addTemplate(dto);
-        return new BaseResultDto(CodeEnum.Success.getCode(),"新增模板成功");
+    public EntityDto<String> addTemplate(@RequestBody TemplateDto dto) {
+        String url = templateApplicaton.addTemplate(dto);
+        return new EntityDto<>(url,CodeEnum.Success.getCode(),"新增模板成功");
     }
 
     /**
@@ -53,7 +54,7 @@ public class TemplateController {
      * @return
      */
     @ApiOperation(value = "修改模板")
-    @PutMapping(value = "/template/{{templateId}}")
+    @PutMapping(value = "/template/{templateId}")
     public BaseResultDto updateTemplate(@PathVariable("templateId") String templateId,@RequestBody TemplateDto dto) throws GeniusException {
         dto.setTemplateId(templateId);
         templateApplicaton.updateTemplate(dto);
