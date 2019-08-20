@@ -26,10 +26,10 @@ public class Template extends BaseEntity {
     @Column(name = "user_id",columnDefinition = "varchar(32) comment'用户ID'")
     private String userId;
 
-    @Column(name = "content",columnDefinition = "blob comment'模板详情'")
+    @Column(name = "content",columnDefinition = "text comment'模板详情'")
     private String content;
 
-    @Column(name = "template_name",columnDefinition = "blob comment'模板名称'")
+    @Column(name = "template_name",columnDefinition = "text comment'模板名称'")
     private String templateName;
 
 

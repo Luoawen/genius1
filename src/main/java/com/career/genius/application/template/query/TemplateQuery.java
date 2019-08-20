@@ -34,7 +34,8 @@ public class TemplateQuery {
         StringBuffer sql = new StringBuffer();
         sql.append(" SELECT id, template_name, title, content, create_time, update_time ");
         sql.append(" FROM app_template ");
-        sql.append(" WHERE user_id = ? ");
-        return supportJdbcTemplate.queryForDto(sql.toString(),TemplateVO.class,templateId);
+        sql.append(" WHERE id = ? ");
+        TemplateVO templateVO = supportJdbcTemplate.queryForDto(sql.toString(), TemplateVO.class, templateId);
+        return templateVO;
     }
 }
