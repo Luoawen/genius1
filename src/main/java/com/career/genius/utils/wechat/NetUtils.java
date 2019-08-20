@@ -75,7 +75,7 @@ public final class NetUtils {
             }
         }
         try {
-            httpPost.setEntity(new UrlEncodedFormEntity((List<? extends org.apache.http.NameValuePair>) valuePairs));
+           // httpPost.setEntity(new UrlEncodedFormEntity((List<? extends org.apache.http.NameValuePair>) valuePairs));
             HttpResponse response = httpClient.execute(httpPost);
             HttpEntity httpEntity = response.getEntity();
             BufferedInputStream bis = new BufferedInputStream(httpEntity.getContent());
