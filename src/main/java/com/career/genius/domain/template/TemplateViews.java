@@ -4,6 +4,7 @@ import com.career.genius.domain.common.BaseEntity;
 import lombok.Data;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
 
@@ -16,6 +17,7 @@ import java.util.Date;
  **/
 @Data
 @Table(name = "template_views")
+@Entity
 public class TemplateViews extends BaseEntity {
 
     @Column(name = "template_id",columnDefinition = "varchar(32) comment'模板ID'")
