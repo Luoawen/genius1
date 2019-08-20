@@ -3,6 +3,10 @@ package com.career.genius.controller.wechat;
 import javax.servlet.http.HttpServletRequest;
 
 import com.career.genius.application.auth.dto.AuthUserInfoDto;
+import com.career.genius.application.template.TemplateApplicaton;
+import com.career.genius.application.template.dto.TemplateDto;
+import com.career.genius.application.template.dto.ViewTemplateDto;
+import com.career.genius.application.template.vo.TemplateVO;
 import com.career.genius.application.wechat.dto.WechatDto;
 import com.career.genius.application.wechat.vo.WechatAuthVO;
 import com.career.genius.application.wechat.vo.WechatShareVO;
@@ -16,14 +20,16 @@ import com.usm.enums.CodeEnum;
 import com.usm.vo.EntityDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/wechat")
 @Api(tags = "微信")
 public class WechatController {
+
+    @Autowired
+    TemplateApplicaton templateApplicaton;
 
     @ApiOperation(value = "获取微信access_token和签名")
     @GetMapping("/sgture")
@@ -42,6 +48,13 @@ public class WechatController {
         AuthUserInfoDto userInfo = SessionUtil.getSessionUser(request);
         WechatShareVO vo = new WechatShareVO(Config.WX_SHARE_URL, userInfo);
         return new EntityDto<>(vo, CodeEnum.Success.getCode(),"成功");
+    }
+
+    @ApiOperation(value = "微信分享页面请求的数据")
+    @PostMapping(value = "/share/template")
+    public EntityDto<TemplateVO> getShareTemplate(@RequestBody ViewTemplateDto dto) throws GeniusException {
+        TemplateVO result = templateApplicaton.addViewInfo(dto);
+        return new EntityDto<>(result, CodeEnum.Success.getCode(),"成功");
     }
 
     /*@GetMapping(value = "/share")

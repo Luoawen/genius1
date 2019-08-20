@@ -29,4 +29,12 @@ public class TemplateQuery {
         sql.append(" WHERE user_id = ? ");
         return supportJdbcTemplate.queryForList(sql.toString(),TemplateVO.class,userId);
     }
+
+    public TemplateVO getTemplateInfo(String templateId) {
+        StringBuffer sql = new StringBuffer();
+        sql.append(" SELECT id, template_name, title, content, create_time, update_time ");
+        sql.append(" FROM app_template ");
+        sql.append(" WHERE user_id = ? ");
+        return supportJdbcTemplate.queryForDto(sql.toString(),TemplateVO.class,templateId);
+    }
 }

@@ -43,9 +43,9 @@ public class TemplateController {
      */
     @ApiOperation(value = "新增模板")
     @PostMapping(value = "/template")
-    public EntityDto<String> addTemplate(@RequestBody TemplateDto dto) {
-        String url = templateApplicaton.addTemplate(dto);
-        return new EntityDto<>(url,CodeEnum.Success.getCode(),"新增模板成功");
+    public EntityDto<TemplateDto> addTemplate(@RequestBody TemplateDto dto) {
+        TemplateDto result = templateApplicaton.addTemplate(dto);
+        return new EntityDto<>(result,CodeEnum.Success.getCode(),"新增模板成功");
     }
 
     /**

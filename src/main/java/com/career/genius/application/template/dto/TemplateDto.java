@@ -27,4 +27,7 @@ public class TemplateDto {
     @ApiModelProperty(value = "当前用户ID")
     private String userId;
 
+    @ApiModelProperty(value = "分享路径")
+    private String url;
+
 }

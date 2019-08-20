@@ -1,9 +1,14 @@
 package com.career.genius.application.template;
 
 import com.career.genius.application.template.dto.TemplateDto;
+import com.career.genius.application.template.dto.ViewTemplateDto;
+import com.career.genius.application.template.query.TemplateQuery;
+import com.career.genius.application.template.vo.TemplateVO;
 import com.career.genius.config.Exception.GeniusException;
 import com.career.genius.domain.template.Template;
+import com.career.genius.domain.template.TemplateViews;
 import com.career.genius.port.dao.template.TemplateDao;
+import com.career.genius.port.dao.template.ViewTemplateDao;
 import com.career.genius.port.dao.user.UserDao;
 import com.usm.utils.ObjectHelper;
 import lombok.Data;
@@ -30,6 +35,12 @@ public class TemplateApplicaton {
     @Autowired
     UserDao userDao;
 
+    @Autowired
+    ViewTemplateDao viewTemplateDao;
+
+    @Autowired
+    TemplateQuery templateQuery;
+
 
 
     /**
@@ -37,11 +48,14 @@ public class TemplateApplicaton {
      * @param dto
      */
     @Transactional
-    public String addTemplate(TemplateDto dto) {
+    public TemplateDto addTemplate(TemplateDto dto) {
         Template template = new Template();
         template.addTemplate(dto.getTitle(),dto.getContent(),dto.getUserId());
-        templateDao.save(template);
-        return URI + "?" + dto.getUserId();
+        template = templateDao.save(template);
+        TemplateDto result = new TemplateDto();
+        result.setTemplateId(template.getId());
+        result.setUrl(URI + "?" + dto.getUserId());
+        return result;
     }
 
     @Transactional
@@ -66,5 +80,16 @@ public class TemplateApplicaton {
         templateDao.save(template);
     }
 
+    @Transactional
+    public TemplateVO addViewInfo(ViewTemplateDto dto) throws GeniusException {
+        Template template = templateDao.findTemplateById(dto.getTemplateId());
+        if (ObjectHelper.isEmpty(template)) {
+            throw new GeniusException("模板不存在！");
+        }
+        TemplateViews views = new TemplateViews();
+        views.addViewInfo(dto.getTemplateId(),dto.getViewUserOpenId(),dto.getViewUserName(),dto.getViewUserHeadImage());
+        viewTemplateDao.save(views);
+        return templateQuery.getTemplateInfo(dto.getTemplateId());
+    }
 
 }
