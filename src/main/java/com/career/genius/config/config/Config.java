@@ -16,4 +16,6 @@ public class Config {
     public static String WX_SHARE_URL = "http://vcard.mjgenius.com/wechat/share.html";
 
     public static String WX_OPEN_APP_ID = "wx5f6a7488cc0f5a36";        //微信公众平台APPID
+
+    public static String WX_OPEN_SECRET = "wx5f6a7488cc0f5a36";        //微信公众平台secret
 }

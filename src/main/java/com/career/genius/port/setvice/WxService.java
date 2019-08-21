@@ -23,34 +23,91 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.fastjson.JSONObject;
 import com.career.genius.application.wechat.bean.WechatOauth2Token;
 import com.career.genius.application.wechat.bean.WechatUserInfo;
+import com.career.genius.application.wechat.dto.WechatTokenDto;
 import com.career.genius.config.config.Config;
 import com.career.genius.utils.wechat.NetUtils;
-import jodd.io.NetUtil;
+import com.usm.exception.ResicoException;
+import com.usm.utils.ObjectHelper;
 import org.apache.http.client.utils.URLEncodedUtils;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.util.IOUtils;
+import org.springframework.web.client.RestTemplate;
 
 
 @Controller
-@RequestMapping("/wx")
+@Service
 @ResponseBody
 public class WxService {
 
     private static  Logger log = LoggerFactory.getLogger(WxService.class);
+
+
+
+    @Resource
+    RestTemplate restTemplate;
+
+
+    public WechatTokenDto getTokenByCode(String code) {
+        String url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + Config.WX_OPEN_APP_ID + "&secret=" + Config.WX_OPEN_SECRET + "&code=" + code +"&grant_type=authorization_code";
+        JSONObject result = restTemplate.getForObject(url, JSONObject.class);
+        if (ObjectHelper.isNotEmpty(result)) {
+            if (ObjectHelper.isNotEmpty(result.get("errcode"))) {
+                throw new ResicoException("微信授权异常");
+            }
+            WechatTokenDto dto = result.toJavaObject(WechatTokenDto.class);
+            return dto;
+        }
+        return null;
+    }
+
+    public WechatUserInfo getWechatInfoByTokenAndOpenId(String token, String openId) {
+        String url = "https://api.weixin.qq.com/sns/userinfo?access_token=" + token + "&openid=" + openId + "&lang=zh_CN";
+        JSONObject result = restTemplate.getForObject(url, JSONObject.class);
+        if (ObjectHelper.isNotEmpty(result)) {
+            if (ObjectHelper.isNotEmpty(result.get("errcode"))) {
+                throw new ResicoException("微信授权异常");
+            }
+            WechatUserInfo dto = result.toJavaObject(WechatUserInfo.class);
+            return dto;
+        }
+        return null;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     /**

@@ -7,7 +7,9 @@ import com.career.genius.application.template.TemplateApplicaton;
 import com.career.genius.application.template.dto.TemplateDto;
 import com.career.genius.application.template.dto.ViewTemplateDto;
 import com.career.genius.application.template.vo.TemplateVO;
+import com.career.genius.application.wechat.bean.WechatUserInfo;
 import com.career.genius.application.wechat.dto.WechatDto;
+import com.career.genius.application.wechat.dto.WechatTokenDto;
 import com.career.genius.application.wechat.vo.WechatAuthVO;
 import com.career.genius.application.wechat.vo.WechatShareVO;
 import com.career.genius.config.Exception.GeniusException;
@@ -31,6 +33,9 @@ public class WechatController {
     @Autowired
     TemplateApplicaton templateApplicaton;
 
+    @Autowired
+    WxService wxService;
+
     @ApiOperation(value = "获取微信access_token和签名")
     @GetMapping("/sgture")
     public EntityDto<WechatAuthVO> sgture(HttpServletRequest request) {
@@ -51,11 +56,17 @@ public class WechatController {
     }
 
     @ApiOperation(value = "微信分享页面请求的数据")
-    @PostMapping(value = "/share/template")
+    @PostMapping(value = "/share/code")
     public EntityDto<TemplateVO> getShareTemplate(@RequestBody ViewTemplateDto dto) throws GeniusException {
+        WechatTokenDto wechatToken = wxService.getTokenByCode(dto.getWechatCode());
+        WechatUserInfo wechatUserInfo = wxService.getWechatInfoByTokenAndOpenId(wechatToken.getAccess_token(), wechatToken.getOpenId());
+        dto.setWechatUserInfo(wechatUserInfo.getNickname(),wechatUserInfo.getHeadImgUrl());
         TemplateVO result = templateApplicaton.addViewInfo(dto);
         return new EntityDto<>(result, CodeEnum.Success.getCode(),"成功");
     }
+
+
+
 
     /*@GetMapping(value = "/share")
     public EntityDto<String> wechatOpen(String userId,HttpServletRequest request) {

@@ -21,6 +21,9 @@ public class ViewTemplateDto {
     @ApiModelProperty(value = "模板ID")
     private String templateId;
 
+    @ApiModelProperty(value = "微信授权code")
+    private String wechatCode;
+
     @ColumnAlias(value = "view_user_openid")
     @ApiModelProperty(value = "浏览者openId")
     private String viewUserOpenId;
@@ -32,4 +35,11 @@ public class ViewTemplateDto {
     @ColumnAlias(value = "view_user_head_image")
     @ApiModelProperty(value = "浏览者头像")
     private String viewUserHeadImage;
+
+    public void setWechatUserInfo(String viewUserName,String viewUserHeadImage) {
+        this.viewUserName = viewUserName;
+        this.viewUserHeadImage = viewUserHeadImage;
+    }
+
+
 }
