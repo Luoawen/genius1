@@ -21,6 +21,9 @@ public class ViewTemplateDto {
     @ApiModelProperty(value = "模板ID")
     private String templateId;
 
+    @ApiModelProperty(value = "用户ID")
+    private String userId;
+
     @ApiModelProperty(value = "微信授权code")
     private String wechatCode;
 
